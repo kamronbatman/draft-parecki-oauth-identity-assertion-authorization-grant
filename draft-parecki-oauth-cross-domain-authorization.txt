@@ -81,7 +81,9 @@ Table of Contents
      5.2.  Response
        5.2.1.  Error Response
      5.3.  Authorization Cross-Domain Code JWT
-   6.  Token Request (Assertion)
+   6.  Token Request (JWT Assertion)
+     6.1.  Processing Rules
+     6.2.  Response
    7.  Security Considerations
      7.1.  Client Authentication
      7.2.  Step-Up Authentication
@@ -376,7 +378,7 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
       who may have an account with an email address but have not done
       SSO yet
 
-6.  Token Request (Assertion)
+6.  Token Request (JWT Assertion)
 
    The Requesting Application makes a JWT Assertion [RFC7523] request to
    the Resource Application's token endpoint using the ACDC JWT
@@ -394,6 +396,16 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
 
       grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
       assertion=eyJhbGciOiJIUzI1NiIsI...
+
+6.1.  Processing Rules
+
+   All of Section 5.2 of [RFC7521] applies, in addition to the following
+   processing rules:
+
+   *  The aud claim MUST identify the token endpoint of the Resource
+      Application as the intended audience of the JWT.
+
+6.2.  Response
 
    The Resource Application token endpoint responds with an OAuth 2.0
    Token Response, e.g.:

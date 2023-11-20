@@ -1175,7 +1175,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-token-request-assertion" class="internal xref">Token Request (Assertion)</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-token-request-jwt-assertion" class="internal xref">Token Request (JWT Assertion)</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-processing-rules-2" class="internal xref">Processing Rules</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-response-2" class="internal xref">Response</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1520,8 +1528,8 @@ signature
 </div>
 <div id="token-request">
 <section id="section-6">
-      <h2 id="name-token-request-assertion">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-token-request-assertion" class="section-name selfRef">Token Request (Assertion)</a>
+      <h2 id="name-token-request-jwt-assertion">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-token-request-jwt-assertion" class="section-name selfRef">Token Request (JWT Assertion)</a>
       </h2>
 <p id="section-6-1">The Requesting Application makes a JWT Assertion <span>[<a href="#RFC7523" class="cite xref">RFC7523</a>]</span> request to the Resource Application's token endpoint using the ACDC JWT previously obtained.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1542,8 +1550,26 @@ grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
   assertion=eyJhbGciOiJIUzI1NiIsI...<a href="#section-6-2.3.3" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-6-3">The Resource Application token endpoint responds with an OAuth 2.0 Token Response, e.g.:<a href="#section-6-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6-4">
+<div id="processing-rules-1">
+<section id="section-6.1">
+        <h3 id="name-processing-rules-2">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-processing-rules-2" class="section-name selfRef">Processing Rules</a>
+        </h3>
+<p id="section-6.1-1">All of Section 5.2 of <span>[<a href="#RFC7521" class="cite xref">RFC7521</a>]</span> applies, in addition to the following processing rules:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1-2.1">
+            <p id="section-6.1-2.1.1">The <code>aud</code> claim <span class="bcp14">MUST</span> identify the token endpoint of the Resource Application as the intended audience of the JWT.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="response-1">
+<section id="section-6.2">
+        <h3 id="name-response-2">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-response-2" class="section-name selfRef">Response</a>
+        </h3>
+<p id="section-6.2-1">The Resource Application token endpoint responds with an OAuth 2.0 Token Response, e.g.:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2-2">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1556,7 +1582,9 @@ Pragma: no-cache
   "expires_in": 86400,
   "refresh_token": "tGzv3JOkF0XG5Qx2TlKWIA",
 }
-</pre><a href="#section-6-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.2-2" class="pilcrow">¶</a>
+</div>
+</section>
 </div>
 </section>
 </div>
