@@ -1,0 +1,205 @@
+
+
+
+
+Web Authorization Protocol                                    A. Parecki
+Internet-Draft                                             K. McGuinness
+Intended status: Standards Track                                    Okta
+Expires: 23 May 2024                                    20 November 2023
+
+
+                    OAuth Cross-Domain Authorization
+         draft-parecki-oauth-cross-domain-authorization-latest
+
+Abstract
+
+   TODO Abstract
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://oktadev.github.io/draft-parecki-oauth-cross-domain-
+   authorization/draft-parecki-oauth-cross-app-authorization.html.
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-parecki-oauth-cross-domain-
+   authorization/.
+
+   Discussion of this document takes place on the Web Authorization
+   Protocol Working Group mailing list (mailto:oauth@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/oauth/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/oauth/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/oktadev/draft-parecki-oauth-cross-domain-
+   authorization.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 23 May 2024.
+
+Copyright Notice
+
+   Copyright (c) 2023 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+     2.1.  Roles
+   3.  Security Considerations
+   4.  IANA Considerations
+   5.  References
+     5.1.  Normative References
+     5.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   Enterprises often have hundreds of SaaS applications.  SaaS
+   applications often have integrations to other SaaS applications that
+   are critical to the application experience and jobs to be done.  When
+   a SaaS app needs to request an access token on-behalf of a user to a
+   3rd party SaaS integration's API, the end-user needs to complete an
+   interactive delegated OAuth 2.0 ceremony and consent.  The SaaS
+   application is not in the same security or policy domain as the 3rd
+   party SaaS integration.
+
+   It is industry best practice for an enterprise to connect their
+   ecosystem of SaaS applications to their Identity Provider (IdP) to
+   centralize identity and access management capabilites for the
+   organization.  End-users get a better experience (SSO) and
+   administrators get better security outcomes such multi-factor
+   authentication and zero-trust.  SaaS applications today enable the
+   administrator to establish trust with an IdP for user authentication
+   but typically don't allow the administrator to trust the IdP for API
+   authorization.
+
+   The draft specification Authorization Cross Domain Code 1.0
+   (https://openid.bitbucket.io/draft-acdc-01.html) (ACDC) defines a new
+   JWT-based grant type that can requested from an Authorization Server
+   and exchanged with another Authorization Server for Access and
+   Refresh tokens.  This new grant enables federation for Authorization
+   Servers across policy or administrative boundaries.  The same
+   enterprise IdP for example that is trusted by applications for SSO
+   can be extended to broker access to APIs.  This enables the enteprise
+   to centralize more access decisions across their SaaS ecosystem and
+   provides better end-user experience for users that need to connect
+   multiple applications via OAuth 2.0.
+
+   This specification extends support for the Authorization Cross-Domain
+   Code (ACDC) grant to [RFC8693] requests, enabling applications to
+   request access to 3rd party applications using backchannel operations
+   that don't interupt the end user's interactive application
+   experience.  Its also useful for deployments where SSO is SAML based
+   and not using OpenID Connect.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.1.  Roles
+
+   Requesting Application (Client)  Application that wants to obtain an
+      OAuth 2.0 access token on behalf of a signed-in user to an
+      external/3rd party application's API that is managed by the same
+      enterprise IdP.
+
+   Resource Application (Resource)  Application that provides an OAuth
+      2.0 Protected Resource that is used across and enterprise's SaaS
+      ecosystem.
+
+   Identity Provider (IdP)  Organization's Identity Provider that is
+      trusted by a set of applications in an enteprise's app ecosystem
+      for identity and access management.
+
+3.  Security Considerations
+
+   TODO Security
+
+4.  IANA Considerations
+
+   This document has no IANA actions.
+
+5.  References
+
+5.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6749>.
+
+   [RFC7521]  Campbell, B., Mortimore, C., Jones, M., and Y. Goland,
+              "Assertion Framework for OAuth 2.0 Client Authentication
+              and Authorization Grants", RFC 7521, DOI 10.17487/RFC7521,
+              May 2015, <https://www.rfc-editor.org/rfc/rfc7521>.
+
+   [RFC7523]  Jones, M., Campbell, B., and C. Mortimore, "JSON Web Token
+              (JWT) Profile for OAuth 2.0 Client Authentication and
+              Authorization Grants", RFC 7523, DOI 10.17487/RFC7523, May
+              2015, <https://www.rfc-editor.org/rfc/rfc7523>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8693]  Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J.,
+              and C. Mortimore, "OAuth 2.0 Token Exchange", RFC 8693,
+              DOI 10.17487/RFC8693, January 2020,
+              <https://www.rfc-editor.org/rfc/rfc8693>.
+
+5.2.  Informative References
+
+   [RFC9470]  Bertocci, V. and B. Campbell, "OAuth 2.0 Step Up
+              Authentication Challenge Protocol", RFC 9470,
+              DOI 10.17487/RFC9470, September 2023,
+              <https://www.rfc-editor.org/rfc/rfc9470>.
+
+Acknowledgments
+
+   TODO acknowledge.
+
+Authors' Addresses
+
+   Aaron Parecki
+   Okta
+   Email: aaron@parecki.com
+
+
+   Karl McGuinness
+   Okta
+   Email: public@karlmcguinness.com
