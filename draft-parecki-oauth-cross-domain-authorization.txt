@@ -410,11 +410,14 @@ Pragma: no-cache
       credentials as registered with the Resource Application's
       authorization server
 
-      POST /oauth2/token HTTP/1.1 Host: acme.chat.app Authorization:
-      Basic yZS1yYW5kb20tc2VjcmV0v3JOkF0XG5Qx2
+   For example:
 
-      grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
-      assertion=eyJhbGciOiJIUzI1NiIsI...
+   POST /oauth2/token HTTP/1.1
+   Host: acme.chat.app
+   Authorization: Basic yZS1yYW5kb20tc2VjcmV0v3JOkF0XG5Qx2
+
+   grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+   assertion=eyJhbGciOiJIUzI1NiIsI...
 
 6.1.  Processing Rules
 

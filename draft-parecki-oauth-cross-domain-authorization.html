@@ -1542,15 +1542,19 @@ signature
 </li>
         <li class="normal" id="section-6-2.3">
           <p id="section-6-2.3.1">Client Authentication - the client authenticates with its credentials as registered with the Resource Application's authorization server<a href="#section-6-2.3.1" class="pilcrow">¶</a></p>
-<p id="section-6-2.3.2">
-POST /oauth2/token HTTP/1.1
-  Host: acme.chat.app
-  Authorization: Basic yZS1yYW5kb20tc2VjcmV0v3JOkF0XG5Qx2<a href="#section-6-2.3.2" class="pilcrow">¶</a></p>
-<p id="section-6-2.3.3">
-grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
-  assertion=eyJhbGciOiJIUzI1NiIsI...<a href="#section-6-2.3.3" class="pilcrow">¶</a></p>
 </li>
       </ul>
+<p id="section-6-3">For example:<a href="#section-6-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6-4">
+<pre>
+POST /oauth2/token HTTP/1.1
+Host: acme.chat.app
+Authorization: Basic yZS1yYW5kb20tc2VjcmV0v3JOkF0XG5Qx2
+
+grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+assertion=eyJhbGciOiJIUzI1NiIsI...
+</pre><a href="#section-6-4" class="pilcrow">¶</a>
+</div>
 <div id="processing-rules-1">
 <section id="section-6.1">
         <h3 id="name-processing-rules-2">
