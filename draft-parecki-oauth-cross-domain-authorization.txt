@@ -304,9 +304,9 @@ Pragma: no-cache
   "expires_in": 300
 }
 
-   *  access_token - The authorization grant.  Token Exchange requires
-      the access_token response parameter for historical reasons, even
-      though this is not an access token.
+   *  access_token - The JWT authorization grant.  Token Exchange
+      requires the access_token response parameter for historical
+      reasons, even though this is not an access token.
 
    *  issued_token_type - urn:ietf:params:oauth:token-type:jwt-
       authorization-grant
