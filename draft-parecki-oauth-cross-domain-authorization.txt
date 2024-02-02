@@ -81,7 +81,7 @@ Table of Contents
      5.2.  Response
        5.2.1.  Error Response
      5.3.  JWT Authorization Grant
-   6.  Token Request (JWT Assertion)
+   6.  Access Token Request
      6.1.  Processing Rules
      6.2.  Response
    7.  Security Considerations
@@ -395,11 +395,11 @@ Pragma: no-cache
       who may have an account with an email address but have not done
       SSO yet
 
-6.  Token Request (JWT Assertion)
+6.  Access Token Request
 
-   The Requesting Application makes a JWT Assertion [RFC7523] request to
-   the Resource Application's token endpoint using the previously
-   obtained JWT authorization grant.
+   The Requesting Application makes an access token request to the
+   Resource Application's token endpoint using the previously obtained
+   JWT authorization grant as a JWT Assertion [RFC7523].
 
    *  grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
 
