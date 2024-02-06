@@ -5,7 +5,7 @@
 Web Authorization Protocol                                    A. Parecki
 Internet-Draft                                             K. McGuinness
 Intended status: Standards Track                                    Okta
-Expires: 5 August 2024                                   2 February 2024
+Expires: 9 August 2024                                   6 February 2024
 
 
                     OAuth Cross-Domain Authorization
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 August 2024.
+   This Internet-Draft will expire on 9 August 2024.
 
 Copyright Notice
 
@@ -401,7 +401,8 @@ Pragma: no-cache
    Resource Application's token endpoint using the previously obtained
    JWT authorization grant as a JWT Assertion [RFC7523].
 
-   *  grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+   *  grant_type=urn:ietf:params:oauth:grant-type:jwt-authorization-
+      grant
 
    *  assertion - The JWT authorization grant obtained in the previous
       step
@@ -416,7 +417,7 @@ Pragma: no-cache
    Host: acme.chat.app
    Authorization: Basic yZS1yYW5kb20tc2VjcmV0v3JOkF0XG5Qx2
 
-   grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+   grant_type=urn:ietf:params:oauth:grant-type:jwt-authorization-grant
    assertion=eyJhbGciOiJIUzI1NiIsI...
 
 6.1.  Processing Rules
