@@ -1535,7 +1535,7 @@ signature
 <p id="section-6-1">The Requesting Application makes an access token request to the Resource Application's token endpoint using the previously obtained JWT authorization grant as a JWT Assertion <span>[<a href="#RFC7523" class="cite xref">RFC7523</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-2.1">
-          <p id="section-6-2.1.1"><code>grant_type=urn:ietf:params:oauth:grant-type:jwt-authorization-grant</code><a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.1.1"><code>grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer</code><a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-2.2">
           <p id="section-6-2.2.1"><code>assertion</code> - The JWT authorization grant obtained in the previous step<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
@@ -1551,7 +1551,7 @@ POST /oauth2/token HTTP/1.1
 Host: acme.chat.app
 Authorization: Basic yZS1yYW5kb20tc2VjcmV0v3JOkF0XG5Qx2
 
-grant_type=urn:ietf:params:oauth:grant-type:jwt-authorization-grant
+grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
 assertion=eyJhbGciOiJIUzI1NiIsI...
 </pre><a href="#section-6-4" class="pilcrow">¶</a>
 </div>

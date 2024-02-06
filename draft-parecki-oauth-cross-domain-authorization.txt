@@ -401,8 +401,7 @@ Pragma: no-cache
    Resource Application's token endpoint using the previously obtained
    JWT authorization grant as a JWT Assertion [RFC7523].
 
-   *  grant_type=urn:ietf:params:oauth:grant-type:jwt-authorization-
-      grant
+   *  grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
 
    *  assertion - The JWT authorization grant obtained in the previous
       step
@@ -417,7 +416,7 @@ Pragma: no-cache
    Host: acme.chat.app
    Authorization: Basic yZS1yYW5kb20tc2VjcmV0v3JOkF0XG5Qx2
 
-   grant_type=urn:ietf:params:oauth:grant-type:jwt-authorization-grant
+   grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
    assertion=eyJhbGciOiJIUzI1NiIsI...
 
 6.1.  Processing Rules
