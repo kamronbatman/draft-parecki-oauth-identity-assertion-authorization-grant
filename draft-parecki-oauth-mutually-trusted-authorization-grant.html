@@ -1315,7 +1315,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Identity Provider</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>https//idp.example</code>
+              <code>https://idp.example</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
               <code>https://acme.idp.example</code>
@@ -1324,15 +1324,60 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           </tr>
         </tbody>
       </table>
-<ol start="1" type="1" class="normal type-1" id="section-3-3">
-<li id="section-3-3.1">
-          <p id="section-3-3.1.1">User logs in to the Client via SSO with the Enterprise IdP (SAML or OIDC)<a href="#section-3-3.1.1" class="pilcrow">¶</a></p>
+<p id="section-3-3">Sequence Diagram<a href="#section-3-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-4">
+<pre>
++---------+      +--------------+   +---------------+  +--------------+
+|         |      |  Mutually    |   |   Resource    |  |              |
+| Client  |      |  Trusted     |   |  Application  |  |  Resource    |
+|         |      | Authorization|   | Authorization |  |  Server      |
+|         |      |   Server     |   |    Server     |  |              |
++----+----+      +-------+------+   +-------+-------+  +------+-------+
+     |                   |                  |                 |
+     |                   |                  |                 |
+     |  --------------&gt;  |                  |                 |
+     |   1 User SSO      |                  |                 |
+     |                   |                  |                 |
+     |     ID Token      |                  |                 |
+     |  &lt;--------------  |                  |                 |
+     |                   |                  |                 |
+     |                   |                  |                 |
+     |                   |                  |                 |
+     | 2 Token Exchange  |                  |                 |
+     | ----------------&gt; |                  |                 |
+     |                   |                  |                 |
+     |   MTAG            |                  |                 |
+     | &lt;---------------- |                  |                 |
+     |                   |                  |                 |
+     |                   |                  |                 |
+     |                   |                  |                 |
+     |  3 Present Authorization Grant       |                 |
+     | ------------------+----------------&gt; |                 |
+     |                   |                  |                 |
+     |    Access Token   |                  |                 |
+     | &lt;----------------------------------- |                 |
+     |                   |                  |                 |
+     |                   |                  |                 |
+     |                   |                  |                 |
+     |  4 Resource Request                  |                 |
+     | -----------------------------------------------------&gt; |
+     |                   |                  |                 |
+     |                   |                  |                 |
+     |                   |                  |                 |
+</pre><a href="#section-3-4" class="pilcrow">¶</a>
+</div>
+<ol start="1" type="1" class="normal type-1" id="section-3-5">
+<li id="section-3-5.1">
+          <p id="section-3-5.1.1">User logs in to the Client via SSO with the Enterprise IdP (SAML or OIDC)<a href="#section-3-5.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-3.2">
-          <p id="section-3-3.2.1">Client requests a JWT Authorization Grant for the Resource Application from the IdP<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+        <li id="section-3-5.2">
+          <p id="section-3-5.2.1">Client requests a Mutually-Trusted Authorization Grant for the Resource Application from the IdP using the token obtained via SSO<a href="#section-3-5.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-3-3.3">
-          <p id="section-3-3.3.1">Client exchanges the JWT Authorization Grant for an access token at the Resource Application's token endpoint<a href="#section-3-3.3.1" class="pilcrow">¶</a></p>
+        <li id="section-3-5.3">
+          <p id="section-3-5.3.1">Client exchanges the Mutually-Trusted Authorization Grant JWT for an access token at the Resource Application's token endpoint<a href="#section-3-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-3-5.4">
+          <p id="section-3-5.4.1">Client makes an API request with the access token<a href="#section-3-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <div id="preconditions">
@@ -1366,24 +1411,34 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-user-authentication">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-user-authentication" class="section-name selfRef">User Authentication</a>
       </h2>
-<p id="section-4-1">The Client initiates an authentication request with the tenant's trusted Enterprise IdP using SAML or OIDC.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">The following is an example using SAML 2.0<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-1">The Client initiates an authentication request with the tenant's trusted Enterprise IdP using SAML or OpenID Connect.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">The following is an example using OpenID Connect<a href="#section-4-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-3">
 <pre>
 302 Redirect
-Location: https://acme.idp.example/SAML2/SSO/Redirect?SAMLRequest={base64AuthnRequest}&amp;RelayState=DyXvaJtZ1BqsURRC
+Location: https://acme.idp.example/authorize?response_type=code&amp;scope=openid&amp;client_id=...
 </pre><a href="#section-4-3" class="pilcrow">¶</a>
 </div>
-<p id="section-4-4">The user authenticates with the IdP and post backs a SAML assertion to the Client<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-4">The user authenticates with the IdP, and is redirected back to the Client with an authorization code, which it can then exchange for an ID Token.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">Note: The Enterprise IdP may enforce security controls such as multi-factor authentication before granting the user access to the Client.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-6">
 <pre>
-POST /SAML2/SSO/ACS HTTP/1.1
-Host: https://acme.wiki.example/SAML2/ACS
+POST /token HTTP/1.1
+Host: acme.idp.example
 Content-Type: application/x-www-form-urlencoded
-Content-Length: nnn
 
-SAMLResponse={AuthnResponse}&amp;RelayState=DyXvaJtZ1BqsURRC
+grant_type=authorization_code
+&amp;code=.....
+
+HTTP/1.1 200 Ok
+Content-Type: application/json
+
+{
+  "id_token": "eyJraWQiOiJzMTZ0cVNtODhwREo4VGZCXzdrSEtQ...",
+  "token_type": "Bearer",
+  "access_token": "7SliwCQP1brGdjBtsaMnXo",
+  "scope": "openid"
+}
 </pre><a href="#section-4-6" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1414,7 +1469,7 @@ SAMLResponse={AuthnResponse}&amp;RelayState=DyXvaJtZ1BqsURRC
           <p id="section-5-2.6.1">Client authentication (e.g. <code>client_id</code> and <code>client_secret</code>, or the more secure <code>private_key_jwt</code> method using <code>client_assertion</code> and <code>client_assertion_type</code>)<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-5-3">For example:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">For example, (tokens truncated for brevity):<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>
 POST /oauth2/token HTTP/1.1
@@ -1425,10 +1480,10 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
 &amp;requested_token_type=urn:ietf:params:oauth:token-type:mtag-jwt
 &amp;resource=https://acme.chat.example/oauth2/token
 &amp;scope=chat.read+chat.history
-&amp;subject_token=PHNhbWw6QXNzZXJ0aW9uCiAgeG1sbnM6c2FtbD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiIKICBJRD0iaWRlbnRpZmllcl8zIgogIFZlcnNpb249IjIuMCIKICBJc3N1ZUluc3RhbnQ9IjIwMjMtMDYtMDVUMDk6MjA6MDVaIj4KICA8c2FtbDpJc3N1ZXI-aHR0cHM6Ly9hY21lLmlkcC5jbG91ZDwvc2FtbDpJc3N1ZXI-CiAgPGRzOlNpZ25hdHVyZQogICAgeG1sbnM6ZHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPi4uLjwvZHM6U2lnbmF0dXJlPgogIDxzYW1sOlN1YmplY3Q-CiAgICA8c2FtbDpOYW1lSUQKICAgICAgRm9ybWF0PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoxLjE6bmFtZWlkLWZvcm1hdDplbWFpbEFkZHJlc3MiPgogICAgICBrYXJsQGFjbWUuY29tCiAgICA8L3NhbWw6TmFtZUlEPgogICAgPHNhbWw6U3ViamVjdENvbmZpcm1hdGlvbgogICAgICBNZXRob2Q9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpjbTpiZWFyZXIiPgogICAgICA8c2FtbDpTdWJqZWN0Q29uZmlybWF0aW9uRGF0YQogICAgICAgIEluUmVzcG9uc2VUbz0iNmM5ODMwZTQtMTMzMi00ZjQ5LWFkZTAtZjI0ZjYxMTk2ZDdlIgogICAgICAgIFJlY2lwaWVudD0iaHR0cHM6Ly9hY21lLndpa2kuYXBwL1NBTUwyL0FDUyIKICAgICAgICBOb3RPbk9yQWZ0ZXI9IjIwMjMtMDYtMDVUMDk6MjU6MDVaIi8-CiAgICA8L3NhbWw6U3ViamVjdENvbmZpcm1hdGlvbj4KICA8L3NhbWw6U3ViamVjdD4KICA8c2FtbDpDb25kaXRpb25zCiAgICBOb3RCZWZvcmU9IjIwMjMtMDYtMDVUMDk6MTU6MDVaIgogICAgTm90T25PckFmdGVyPSIyMDIzLTA2LTA1VDA5OjI1OjA1WiI-CiAgICA8c2FtbDpBdWRpZW5jZVJlc3RyaWN0aW9uPgogICAgICA8c2FtbDpBdWRpZW5jZT5odHRwczovL2FjbWUud2lraS5hcHA8L3NhbWw6QXVkaWVuY2U-CiAgICA8L3NhbWw6QXVkaWVuY2VSZXN0cmljdGlvbj4KICA8L3NhbWw6Q29uZGl0aW9ucz4KICA8c2FtbDpBdXRoblN0YXRlbWVudAogICAgQXV0aG5JbnN0YW50PSIyMDIzLTA2LTA1VDA5OjIwOjAwWiIKICAgIFNlc3Npb25JbmRleD0iMzcxMWVjZDYtN2Y5NC00NWM3LTgxYzUtNDkyNjI1NDg0NWYzIj4KICAgIDxzYW1sOkF1dGhuQ29udGV4dD4KICAgICAgPHNhbWw6QXV0aG5Db250ZXh0Q2xhc3NSZWY-CiAgICAgICAgdXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmRQcm90ZWN0ZWRUcmFuc3BvcnQKICAgICA8L3NhbWw6QXV0aG5Db250ZXh0Q2xhc3NSZWY-CiAgICA8L3NhbWw6QXV0aG5Db250ZXh0PgogIDwvc2FtbDpBdXRoblN0YXRlbWVudD4KPC9zYW1sOkFzc2VydGlvbj4
-&amp;subject_token_type=urn:ietf:params:oauth:token-type:saml2
+&amp;subject_token=eyJraWQiOiJzMTZ0cVNtODhwREo4VGZCXzdrSEtQ...
+&amp;subject_token_type=urn:ietf:params:oauth:token-type:id_token
 &amp;client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer
-&amp;client_assertion=eyJhbGciOiJSUzI1NiIsImtpZCI6IjIyIn0.
+&amp;client_assertion=eyJhbGciOiJSUzI1NiIsImtpZCI6IjIyIn0...
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
 <div id="processing-rules">
