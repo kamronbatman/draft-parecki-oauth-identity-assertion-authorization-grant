@@ -5,7 +5,7 @@
 Web Authorization Protocol                                    A. Parecki
 Internet-Draft                                             K. McGuinness
 Intended status: Standards Track                                    Okta
-Expires: 1 September 2024                               29 February 2024
+Expires: 2 September 2024                                   1 March 2024
 
 
               Cross-Domain Mutually Trusted Authorization
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2024.
+   This Internet-Draft will expire on 2 September 2024.
 
 Copyright Notice
 
@@ -413,8 +413,8 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
    *  aud - Token endpoint of the Resource Application's authorization
       server
 
-   *  azp - Client ID as registered with the Resource Application's
-      authorization server.
+   *  client_id - Client ID as registered with the Resource
+      Application's authorization server.
 
    *  exp -
 
@@ -440,7 +440,7 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
      "iss": "https://acme.idp.example",
      "sub": "U019488227",
      "aud": "https://acme.chat.example/oauth2/token",
-     "azp": "f53f191f9311af35",
+     "client_id": "f53f191f9311af35",
      "exp": 1311281970,
      "iat": 1311280970,
      "scopes" : [ "chat.read" , "chat.history" ]
