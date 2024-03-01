@@ -1592,12 +1592,12 @@ Cache-Control: no-store
             <p id="section-5.3-2.8.1"><code>jti</code> - Unique ID of this JWT<a href="#section-5.3-2.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-5.3-3">The <code>typ</code> of the JWT indicated in the JWT header <span class="bcp14">MUST</span> be <code>oauth-itag+jwt</code>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">The <code>typ</code> of the JWT indicated in the JWT header <span class="bcp14">MUST</span> be <code>oauth-id-jag+jwt</code>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">An example JWT shown with expanded header and payload claims is below:<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.3-5">
 <pre>
 {
-  "typ": "oauth-itag+jwt"
+  "typ": "oauth-id-jag+jwt"
 }
 .
 {
@@ -1663,7 +1663,7 @@ assertion=eyJhbGciOiJIUzI1NiIsI...
 <p id="section-6.1-1">All of Section 5.2 of <span>[<a href="#RFC7521" class="cite xref">RFC7521</a>]</span> applies, in addition to the following processing rules:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-2.1">
-            <p id="section-6.1-2.1.1">Validate the JWT <code>typ</code> is <code>oauth-mtag+jwt</code> (per <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span>)<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.1.1">Validate the JWT <code>typ</code> is <code>oauth-id-jag+jwt</code> (per <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span>)<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.1-2.2">
             <p id="section-6.1-2.2.1">The <code>aud</code> claim <span class="bcp14">MUST</span> identify the token endpoint of the Resource Application as the intended audience of the JWT.<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
