@@ -87,13 +87,13 @@ Table of Contents
    7.  Security Considerations
      7.1.  Client Authentication
      7.2.  Step-Up Authentication
-     7.3.  Relationship to SAML 2.0 Authorization Grant RFC7522
    8.  IANA Considerations
      8.1.  Media Types
      8.2.  OAuth URI Registration
    9.  References
      9.1.  Normative References
      9.2.  Informative References
+   Appendix A.  Relationship to RFC7522 SAML 2.0 Authorization Grant
    Acknowledgments
    Authors' Addresses
 
@@ -471,8 +471,8 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
 
    *  grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
 
-   *  assertion - The JWT authorization grant obtained in the previous
-      step
+   *  assertion - The Identity Assertion Authorization Grant JWT
+      obtained in the previous step
 
    *  Client Authentication - the Client authenticates with its
       credentials as registered with the Resource Application's
@@ -550,16 +550,14 @@ Cache-Control: no-store
    authorization request if using OIDC for SSO when performing a step-up
    to skip the need for additional token exchange round-trip.
 
-7.3.  Relationship to SAML 2.0 Authorization Grant RFC7522
-
 8.  IANA Considerations
 
 8.1.  Media Types
 
-   This section registers oauth-itag+jwt, a new media type [RFC2046] in
-   the "Media Types" registry [IANA.MediaTypes] in the manner described
-   in [RFC6838].  It can be used to indicate that the content is a
-   Identity Assertion Authorization Grant JWT.
+   This section registers oauth-id-jag+jwt, a new media type [RFC2046]
+   in the "Media Types" registry [IANA.MediaTypes] in the manner
+   described in [RFC6838].  It can be used to indicate that the content
+   is a Identity Assertion Authorization Grant JWT.
 
 8.2.  OAuth URI Registration
 
@@ -569,8 +567,8 @@ Cache-Control: no-store
 
    *  URN: urn:ietf:params:oauth:token-type:id-jag
 
-   *  Common Name: Token type URI for a Identity Assertion Authorization
-      Grant JWT
+   *  Common Name: Token type URI for a Identity Assertion JWT
+      Authorization Grant
 
    *  Change Controller: IESG
 
@@ -639,10 +637,34 @@ Cache-Control: no-store
 
 9.2.  Informative References
 
+   [RFC7522]  Campbell, B., Mortimore, C., and M. Jones, "Security
+              Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0
+              Client Authentication and Authorization Grants", RFC 7522,
+              DOI 10.17487/RFC7522, May 2015,
+              <https://www.rfc-editor.org/rfc/rfc7522>.
+
    [RFC9470]  Bertocci, V. and B. Campbell, "OAuth 2.0 Step Up
               Authentication Challenge Protocol", RFC 9470,
               DOI 10.17487/RFC9470, September 2023,
               <https://www.rfc-editor.org/rfc/rfc9470>.
+
+Appendix A.  Relationship to RFC7522 SAML 2.0 Authorization Grant
+
+   "SAML 2.0 Profile for OAuth 2.0 Client Authentication and
+   Authorization Grants" ([RFC7522]) describes a mechanism for using a
+   SAML assertion as an authorization grant to obtain an access token.
+   Directly exchanging a SAML assertion for an access token is limited
+   in the ways this can be securely deployed.
+
+   This specification adds an intermediate step of exchanging a SAML
+   assertion for the intermediate Identity Assertion Authorization
+   Grant, which is then later exchanged for an access token.  By adding
+   this intermediate step, this provides the security benefit of being
+   able to indicate which API the access token is being requested,
+   enabling the authorization server to enforce policies before issuing
+   the authorization grant.  Without this step, policies must be
+   enforced at each resource application's authorization server, which
+   doesn't scale well and is impossible in some deployments.
 
 Acknowledgments
 

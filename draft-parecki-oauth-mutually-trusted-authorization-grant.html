@@ -1194,9 +1194,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-step-up-authentication" class="internal xref">Step-Up Authentication</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-relationship-to-saml-20-aut" class="internal xref">Relationship to SAML 2.0 Authorization Grant RFC7522</a></p>
-</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -1222,10 +1219,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-relationship-to-rfc7522-sam" class="internal xref">Relationship to RFC7522 SAML 2.0 Authorization Grant</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1638,7 +1638,7 @@ signature
           <p id="section-6-2.1.1"><code>grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer</code><a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-2.2">
-          <p id="section-6-2.2.1"><code>assertion</code> - The JWT authorization grant obtained in the previous step<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.2.1"><code>assertion</code> - The Identity Assertion Authorization Grant JWT obtained in the previous step<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-2.3">
           <p id="section-6-2.3.1">Client Authentication - the Client authenticates with its credentials as registered with the Resource Application's authorization server<a href="#section-6-2.3.1" class="pilcrow">¶</a></p>
@@ -1732,13 +1732,6 @@ Cache-Control: no-store
 <p id="section-7.2-4">TBD: It may make more sense to request the Identity Assertion Authorization Grant as an additional <code>response_type</code> on the authorization request if using OIDC for SSO when performing a step-up to skip the need for additional token exchange round-trip.<a href="#section-7.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="relationship-to-saml-20-authorization-grant-rfc7522">
-<section id="section-7.3">
-        <h3 id="name-relationship-to-saml-20-aut">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-relationship-to-saml-20-aut" class="section-name selfRef">Relationship to SAML 2.0 Authorization Grant RFC7522</a>
-      </h3>
-</section>
-</div>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1751,7 +1744,7 @@ Cache-Control: no-store
         <h3 id="name-media-types">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-media-types" class="section-name selfRef">Media Types</a>
         </h3>
-<p id="section-8.1-1">This section registers <code>oauth-itag+jwt</code>, a new media type <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span> in the "Media Types" registry <span>[<a href="#IANA.MediaTypes" class="cite xref">IANA.MediaTypes</a>]</span> in the manner described in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>. It can be used to indicate that the content is a Identity Assertion Authorization Grant JWT.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">This section registers <code>oauth-id-jag+jwt</code>, a new media type <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span> in the "Media Types" registry <span>[<a href="#IANA.MediaTypes" class="cite xref">IANA.MediaTypes</a>]</span> in the manner described in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>. It can be used to indicate that the content is a Identity Assertion Authorization Grant JWT.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="oauth-uri-registration">
@@ -1765,7 +1758,7 @@ Cache-Control: no-store
             <p id="section-8.2-2.1.1">URN: urn:ietf:params:oauth:token-type:id-jag<a href="#section-8.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.2-2.2">
-            <p id="section-8.2-2.2.1">Common Name: Token type URI for a Identity Assertion Authorization Grant JWT<a href="#section-8.2-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.2-2.2.1">Common Name: Token type URI for a Identity Assertion JWT Authorization Grant<a href="#section-8.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-8.2-2.3">
             <p id="section-8.2-2.3.1">Change Controller: IESG<a href="#section-8.2-2.3.1" class="pilcrow">¶</a></p>
@@ -1845,6 +1838,10 @@ Cache-Control: no-store
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="RFC7522">[RFC7522]</dt>
+        <dd>
+<span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Mortimore, C.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span class="seriesInfo">RFC 7522</span>, <span class="seriesInfo">DOI 10.17487/RFC7522</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7522">https://www.rfc-editor.org/rfc/rfc7522</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9470">[RFC9470]</dt>
       <dd>
 <span class="refAuthor">Bertocci, V.</span> and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"OAuth 2.0 Step Up Authentication Challenge Protocol"</span>, <span class="seriesInfo">RFC 9470</span>, <span class="seriesInfo">DOI 10.17487/RFC9470</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9470">https://www.rfc-editor.org/rfc/rfc9470</a>&gt;</span>. </dd>
@@ -1853,16 +1850,25 @@ Cache-Control: no-store
 </section>
 </div>
 </section>
-<div id="acknowledgments">
+<div id="relationship-to-rfc7522-saml-20-authorization-grant">
 <section id="appendix-A">
+      <h2 id="name-relationship-to-rfc7522-sam">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-relationship-to-rfc7522-sam" class="section-name selfRef">Relationship to RFC7522 SAML 2.0 Authorization Grant</a>
+      </h2>
+<p id="appendix-A-1">"SAML 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants" (<span>[<a href="#RFC7522" class="cite xref">RFC7522</a>]</span>) describes a mechanism for using a SAML assertion as an authorization grant to obtain an access token. Directly exchanging a SAML assertion for an access token is limited in the ways this can be securely deployed.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">This specification adds an intermediate step of exchanging a SAML assertion for the intermediate Identity Assertion Authorization Grant, which is then later exchanged for an access token. By adding this intermediate step, this provides the security benefit of being able to indicate which API the access token is being requested, enabling the authorization server to enforce policies before issuing the authorization grant. Without this step, policies must be enforced at each resource application's authorization server, which doesn't scale well and is impossible in some deployments.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-B">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">TODO acknowledge.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">TODO acknowledge.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-B">
+<section id="appendix-C">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
